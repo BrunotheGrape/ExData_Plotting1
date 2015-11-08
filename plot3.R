@@ -9,14 +9,13 @@ dt <- as.POSIXct(paste(ihepcs$Date, ihepcs$Time)) # creates formated date time c
 ihepct <- cbind(ihepcs,dt) #adds the date time column to the data frame
 ihepct$Global_active_power <- as.numeric(ihepcs$Global_active_power) #converts data to numeric
 png(filename = "plot3.png") # creates png file
-plot3 <- plot(ihepct$Sub_metering_1, type = "l", ylab = "Energy sub metering", xlab ="", axes = FALSE)# creates base plot
+plot3 <- plot(ihepct$Sub_metering_1, type = "l", ylab = "Energy sub metering", xlab ="", ylim = c(0, 40), xaxs = "i", yaxs = "i", axes = FALSE)# creates base plot and controls for axis perameters
 axis(1, at = c(1, 1440, 2880), labels = c("Thur", "Fri", "Sat")) # creates x axis
 axis(2, at = c(0, .25, .5, .75, 1), labels = c("0", "10", "20", "30", "40")) # creates y axis
-lines(ihepct$Sub_metering_2, type = "l", col = "red")
-lines(ihepct$Sub_metering_3, type = "l", col = "blue")
-legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub-metering_3"), text.col = c("black", "red", "blue"), lty = 1, col = c("black", "red", "blue"))
-#legend("topright", c("Sub_metering_2", lty = 1, col = "red")
-#legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3", col = c("black", "red", "blue"))
+lines(ihepct$Sub_metering_2, type = "l", col = "red") # adds submetering 2
+lines(ihepct$Sub_metering_3, type = "l", col = "blue") #adds submetering 3
+legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub-metering_3"), text.col = c("black", "red", "blue"), lty = 1, col = c("black", "red", "blue")) # creates legend
+par(mar = c(2, 2, 5, 2)) #sets chart area margins
 dev.off() # saves plot and turns off device
 
 
